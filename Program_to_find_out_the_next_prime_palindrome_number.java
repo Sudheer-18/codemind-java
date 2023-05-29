@@ -1,56 +1,43 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class NextPrimePalindrome {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int number = scanner.nextInt();
-        
-        int nextPrimePalindrome = findNextPrimePalindrome(number);
-        
-        System.out.println(nextPrimePalindrome);
-    }
-    
-    public static int findNextPrimePalindrome(int number) {
-        int nextNumber = number + 1;
-        
-        while (true) {
-            if (isPalindrome(nextNumber) && isPrime(nextNumber)) {
-                return nextNumber;
-            }
-            
-            nextNumber++;
-        }
-    }
-    
-    public static boolean isPalindrome(int number) {
-        String str = Integer.toString(number);
-        
-        int i = 0;
-        int j = str.length() - 1;
-        
-        while (i < j) {
-            if (str.charAt(i) != str.charAt(j)) {
-                return false;
-            }
-            
-            i++;
-            j--;
-        }
-        
-        return true;
-    }
-    
-    public static boolean isPrime(int number) {
-        if (number <= 1) {
-            return false;
-        }
-        
-        for (int i = 2; i <= Math.sqrt(number); i++) {
-            if (number % i == 0) {
-                return false;
+public class nextprimepallindrome {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = n + 1; i > 0; i++) {
+            if (ispallindrome(i)) {
+                System.out.println(i);
+                break;
             }
         }
-        
-        return true;
+    }
+
+    public static boolean ispallindrome(int n) {
+        int m = n;
+        int r, s = 0;
+        while (n != 0) {
+            r = n % 10;
+            s = s * 10 + r;
+            n = n / 10;
+        }
+        if (s == m) {
+            if (isprime(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isprime(int n) {
+        int c = 0, i;
+        for (i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                c++;
+            }
+        }
+        if (c == 2) {
+            return true;
+        }
+        return false;
     }
 }
